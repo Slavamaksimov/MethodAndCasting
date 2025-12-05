@@ -21,6 +21,7 @@ internal class Program
             Console.WriteLine("Ei tea sellist vastust");
         }
 
+
     }
 
     private static int Täring(Random juhuarv)
