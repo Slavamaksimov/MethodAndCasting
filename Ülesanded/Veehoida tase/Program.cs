@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Veehoida_tase
@@ -23,21 +24,20 @@ namespace Veehoida_tase
 
                 double veetase = 0d;
                 Console.WriteLine("Tere"+correctUser+". Mis on veetasame hetkeseis meetrites?: ");
-                bool errorState = false; 
-                while (veetase < 1.00d && veetase > 4.25d )
+                bool errorState = false;
+                do
                 {
                     Console.WriteLine("Mis on veetase anduril?:");
-                    double andur = double.Parse(Console.ReadLine()); 
-                    if (veetase < 1.00d && veetase > 4.25d)
+                    double andur = double.Parse(Console.ReadLine());
+                    veetase = andur; 
+                    if (veetase < 1.00d || veetase > 4.25d)
                     {
                         errorState = true;
                         break;
                     }
-
-                    HoiatusSõnum(veetase, errorState);
-
-
-                } 
+                }
+                while (veetase < 1.00d && veetase > 4.25d);
+                HoiatusSõnum(veetase, errorState);
             }
 
 
@@ -45,15 +45,24 @@ namespace Veehoida_tase
 
         private static void HoiatusSõnum(double veetase, bool errorState)
         {
-            
-            if (veetase >= 1.00d)
+
+            if (veetase >= 1.00d &&  veetase < 2.00d)
             {
-                        
+                Console.WriteLine("VEETASE ON MADAL");
             }
-
-
-
-
+            else if (veetase >= 2.0d && veetase < 3.5d) 
+            {
+                Console.WriteLine("veetase on normaalne PaAnIkAkS ei ole PÕHjUsT!!!!!");
+            }
+            else if (veetase >= 3.5d && veetase < 4.25d)
+            {
+                Console.WriteLine("tase on liiga kõrge, chill...");
+            }
+            else
+            {
+                errorState = true; 
+                Console.WriteLine("* anduri viga, kontrolli seedet *");
+            }
         }
 
 
